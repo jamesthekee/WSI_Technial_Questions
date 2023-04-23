@@ -1,10 +1,11 @@
 # import pandas as pd
-
 # df = pd.read_csv("seq.tsv", sep="\t")
 
 
 # Question 1 & 2 (without pandas)
 def loadData():
+    """
+    Load data from the file and test if it is in expected format. """
     data = []
     with open("seq.tsv", mode="r") as f:
         lines = f.read().splitlines()
@@ -14,7 +15,6 @@ def loadData():
             x[0] = int(x[0])
             data.append(x)
             
-    print(cols)
             
     # TEST DATA
     # Check there is the expected number of cols,
@@ -24,14 +24,18 @@ def loadData():
         assert len(row) == 3
         assert type(row[0]) == int   
         assert type(row[1]) == str 
-        assert type(row[2]) == str        
+        assert type(row[2]) == str    
+    
+    print("Loaded data has passed tests")    
     
     return data
     
 def count_differences(seqa, seqb):
-    # Count number of deletions, insertions, mutations edits.
-    # Since an edit could represent an infinite number of edits, e.g TAT->TACT could be 3 deletions and 4 additions, 
-    # I will assume we are only interested in the most short sequence of edits
+    """
+    Count number of deletions, insertions, mutations edits.
+    Since an edit could represent an infinite number of edits, e.g TAT->TACT could be 3 deletions and 4 additions, 
+    I calculate the answer for the shortest sequence of individual edits.
+    """
     
     # Implemented with an adapted needleman-wunsch,
     # so that is resembles calculating edit distance more.
@@ -78,10 +82,11 @@ def count_differences(seqa, seqb):
         
 
 def question3(data):
+    print("Question 3 output: ")
     for _, seq, edit in data:
         result = count_differences(seq,edit)
         print(seq, edit)
-        print(f"Mutations: {result[0]}\nDeletions: {result[1]}\nInsertions: {result[2]}")
+        print(f"Mutations: {result[0]}\nDeletions: {result[1]}\nInsertions: {result[2]}\n")
         
 
 question3(loadData())
