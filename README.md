@@ -1,4 +1,4 @@
-# WSI_Technial_Questions
+# WSI_Technical_Questions
 
 part1.py contains questions 1,2,3 in python.
 
